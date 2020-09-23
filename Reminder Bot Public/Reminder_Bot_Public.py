@@ -66,57 +66,57 @@ async def rolecallCommand():
     user6ID = 'put user ID here'
     user7ID = 'put user ID here'
 
-    # Gets current time - need this for calculations
-    # The reason why I subtracted an extra 1 when calculating the hours to wait was to account for the minute offset.
-    # This converts UTC time to EST (ex: 8 PM EST = midnight UTC)
-    currentHourUTC = datetime.datetime.now().hour + UTCToESTOffset
-    hoursToWait = 24 - currentHourUTC - 1
+    # This will loop until the right time is found to post the message.
+    timeToPost = False
 
-    if hoursToWait < 0 or hoursToWait == 24:
-       hoursToWait = 0
+    while timeToPost == False:
 
-    currentMinute = datetime.datetime.now().minute
-    minutesToWait = 60 - currentMinute
+        # Gets current time - need this to calculate when I can run the loop again.
+        # The reason why I subtracted an extra 1 when calculating the hours to wait was to account for the minute offset.
+        # This converts UTC time to EST (ex: 8 PM EST = midnight UTC)
 
-    delayInSeconds = (hoursToWait * 3600) + (minutesToWait * 60)
+        currentHourUTC = datetime.datetime.now().hour + UTCToESTOffset
+        hoursToWait = 24 - currentHourUTC - 1
 
-    if currentHourUTC == 20 & currentMinute == 0:
-        timeToPost = True
-    else:
-        timeToPost = False
+        if hoursToWait < 0 or hoursToWait == 24:
+           hoursToWait = 0
 
-    if timeToPost == True:
-        # Messages to be sent on each day
-        if dayOfTheWeek == 0:
-            await messageChannel.send("Happy Monday! It's %s's turn to ask a question!" % user1ID)
+        currentMinute = datetime.datetime.now().minute
+        minutesToWait = 60 - currentMinute
 
-        elif dayOfTheWeek == 1:
-            await messageChannel.send("Happy Tuesday! It's %s's turn to ask a question!" % user2ID)
+        delayInSeconds = (hoursToWait * 3600) + (minutesToWait * 60)
 
-        elif dayOfTheWeek == 2:
-            await messageChannel.send("Happy Wednesday! It's %s's turn to ask a question!" % user3ID)
-
-        elif dayOfTheWeek == 3:
-            await messageChannel.send("Happy Thursday! It's %s's turn to ask a question!" % user4ID)
-
-        elif dayOfTheWeek == 4:
-            await messageChannel.send("Happy Friday! It's %s's turn to ask a question!" % user5ID)
-
-        elif dayOfTheWeek == 5:
-            await messageChannel.send("Happy Saturday! It's %s's turn to ask a question!" % user6ID)
-
-        elif dayOfTheWeek == 6:
-            await messageChannel.send("Happy Sunday! It's %s's turn to ask a question!" % user7ID)
-
+        if delayInSeconds == 0:
+            timeToPost == True
+            print("Time is correct! Now posting message...")
         else:
-            await messageChannel.send("This isn't a case I was coded to cover. Perhaps this is a bug?\n(Send bugs to Vithraldor#3645)")
+            print("Invalid time. Going to sleep...")
+            await asyncio.sleep(delayInSeconds)
 
-    elif timeToPost == False:
-        print("Not valid time. Sleeping...")
-        await asyncio.sleep(delayInSeconds)
-         
+    # Messages to be sent on each day
+    if dayOfTheWeek == 0:
+        await messageChannel.send("Happy Monday! It's %s's turn to ask a question!" % user1ID)
+
+    elif dayOfTheWeek == 1:
+        await messageChannel.send("Happy Tuesday! It's %s's turn to ask a question!" % user2ID)
+
+    elif dayOfTheWeek == 2:
+        await messageChannel.send("Happy Wednesday! It's %s's turn to ask a question!" % user3ID)
+
+    elif dayOfTheWeek == 3:
+        await messageChannel.send("Happy Thursday! It's %s's turn to ask a question!" % user4ID)
+
+    elif dayOfTheWeek == 4:
+        await messageChannel.send("Happy Friday! It's %s's turn to ask a question!" % user5ID)
+
+    elif dayOfTheWeek == 5:
+        await messageChannel.send("Happy Saturday! It's %s's turn to ask a question!" % user6ID)
+
+    elif dayOfTheWeek == 6:
+        await messageChannel.send("Happy Sunday! It's %s's turn to ask a question!" % user7ID)
+
     else:
-        await messageChannel.send("This isn't a case I was coded to cover. Send bugs to Vithraldor#3645.")
+        await messageChannel.send("This isn't a case I was coded to cover. Perhaps this is a bug?\n(Let Vith know her bot is broken)")
 
 
 rolecallCommand.start()
