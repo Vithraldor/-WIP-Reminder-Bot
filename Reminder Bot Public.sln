@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30002.166
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Reminder Bot Public", "Reminder Bot Public\Reminder Bot Public.pyproj", "{E24031FF-22D4-4E4C-864E-6E1F7871B961}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E24031FF-22D4-4E4C-864E-6E1F7871B961}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E24031FF-22D4-4E4C-864E-6E1F7871B961}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {647EF6AD-0E20-430B-BF4C-8CFADB88D3B9}
+	EndGlobalSection
+EndGlobal
